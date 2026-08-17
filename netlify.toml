@@ -37,31 +37,38 @@
 # The PowerShell scripts are tracked in git (they're how the drawing images get
 # regenerated) but they aren't part of the website, so don't serve them.
 # Listed explicitly rather than by wildcard — Netlify's splat matching doesn't
-# reliably match on file extension.
+# reliably match on file extension. force = true is required: without it a
+# real file on disk beats the redirect rule and the script downloads anyway.
 [[redirects]]
   from = "/build-site.ps1"
   to = "/404.html"
   status = 404
+  force = true
 [[redirects]]
   from = "/render-pdfs.ps1"
   to = "/404.html"
   status = 404
+  force = true
 [[redirects]]
   from = "/crop.ps1"
   to = "/404.html"
   status = 404
+  force = true
 [[redirects]]
   from = "/mask.ps1"
   to = "/404.html"
   status = 404
+  force = true
 [[redirects]]
   from = "/optimize-images.ps1"
   to = "/404.html"
   status = 404
+  force = true
 [[redirects]]
   from = "/serve.ps1"
   to = "/404.html"
   status = 404
+  force = true
 
 # Baseline security headers. Nothing here restricts the site's own behaviour —
 # it loads its own CSS/JS plus Google Fonts, all of which stay allowed.
