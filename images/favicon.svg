@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Matches the boxed "KJ" mark in the site nav: ink rule on paper ground. -->
+  <rect width="32" height="32" fill="#f2f0e8"/>
+  <rect x="2.5" y="2.5" width="27" height="27" fill="none" stroke="#1c1e1b" stroke-width="1.5"/>
+  <text x="16" y="16" fill="#1c1e1b"
+        font-family="'IBM Plex Mono', ui-monospace, Consolas, monospace"
+        font-size="13" font-weight="700" letter-spacing="0.2"
+        text-anchor="middle" dominant-baseline="central">KJ</text>
+</svg>

@@ -1,0 +1,73 @@
+# Netlify config. No build step — this is a plain static site, so "publish"
+# just points at the folder that gets served.
+#
+# If you deploy by dragging the _site folder onto Netlify, this file rides
+# along inside it and applies. If you connect a Git repo instead, set the
+# publish directory to "." in the Netlify UI (or change publish below to ".").
+
+[build]
+  publish = "."
+  command = ""
+
+# Long cache on fingerprint-free static assets is risky, so images and PDFs get
+# a modest cache with revalidation: fast repeat visits, but a re-upload shows
+# up rather than sitting stale in someone's browser for a year.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+
+# CSS and JS change more often than images and are small — always revalidate so
+# a style fix is never invisible behind a cached copy.
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# The PowerShell scripts are tracked in git (they're how the drawing images get
+# regenerated) but they aren't part of the website, so don't serve them.
+# Listed explicitly rather than by wildcard — Netlify's splat matching doesn't
+# reliably match on file extension.
+[[redirects]]
+  from = "/build-site.ps1"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/render-pdfs.ps1"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/crop.ps1"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/mask.ps1"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/optimize-images.ps1"
+  to = "/404.html"
+  status = 404
+[[redirects]]
+  from = "/serve.ps1"
+  to = "/404.html"
+  status = 404
+
+# Baseline security headers. Nothing here restricts the site's own behaviour —
+# it loads its own CSS/JS plus Google Fonts, all of which stay allowed.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"

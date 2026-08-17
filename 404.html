@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sheet Not Found — Kye Jackson</title>
+<meta name="description" content="That page doesn't exist. Head back to the portfolio." />
+<meta name="robots" content="noindex" />
+<!-- Paths here are root-absolute on purpose: Netlify serves this file for any
+     missing URL, including deep ones like /projects/typo.html, so relative
+     paths would resolve against the wrong directory and break the styling. -->
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/images/favicon-32.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+<meta name="theme-color" content="#f2f0e8" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body data-sheet="404">
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="/index.html" class="nav-logo"><span class="mark">KJ</span>Kye Jackson</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/portfolio.html">Portfolio</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- min-height keeps the footer near the bottom of the viewport; without it
+       this short page leaves the title block stranded halfway up the screen. -->
+  <section class="case-hero container" style="min-height:66vh;">
+    <span class="eyebrow">Error 404 — Sheet Not Issued</span>
+    <h1>Page<br>Not Found</h1>
+    <p class="lede">This drawing was never issued, or it's been superseded. Nothing here is lost — the sheet you're after is probably in the portfolio.</p>
+    <div class="hero-actions">
+      <a href="/portfolio.html" class="btn btn-primary">View the portfolio</a>
+      <a href="/index.html" class="btn btn-secondary">Back to home</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <dl class="title-block">
+      <div><dt>Drawn</dt><dd>Kye Jackson</dd></div>
+      <div><dt>Scale</dt><dd>1:1</dd></div>
+      <div><dt>Sheet</dt><dd>Not Found</dd></div>
+      <div><dt>Year</dt><dd><span id="year"></span></dd></div>
+      <div class="footer-links">
+        <a href="mailto:kyejackoson@gmail.com">Email</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </dl>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Kye Jackson</title>
+<meta name="description" content="Get in touch with Kye Jackson about industrial design opportunities, freelance projects, or portfolio enquiries." />
+<link rel="canonical" href="https://kyejackson.com/contact.html" />
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="images/favicon-32.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+<meta name="theme-color" content="#f2f0e8" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Kye Jackson" />
+<meta property="og:url" content="https://kyejackson.com/contact.html" />
+<meta property="og:title" content="Contact — Kye Jackson" />
+<meta property="og:description" content="Get in touch with Kye Jackson about industrial design opportunities, freelance projects, or portfolio enquiries." />
+<meta property="og:image" content="https://kyejackson.com/images/og-card.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Contact — Kye Jackson" />
+<meta name="twitter:description" content="Get in touch with Kye Jackson about industrial design opportunities, freelance projects, or portfolio enquiries." />
+<meta name="twitter:image" content="https://kyejackson.com/images/og-card.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-sheet="CONTACT">
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="nav-logo"><span class="mark">KJ</span>Kye Jackson</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero container" style="padding-bottom: 3rem;">
+    <span class="eyebrow">Contact</span>
+    <h1>Let's connect.</h1>
+    <p class="lede">I'm currently looking for early-career opportunities across product and industrial design, with an interest in product development, furniture, lifestyle products, and footwear design. Based on the Gold Coast, I'm open to relocating for the right opportunity, including Brisbane, Melbourne, or other design-focused locations.</p>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container contact-grid">
+
+      <div>
+        <!--
+          Netlify Forms. Netlify's build step detects this form by its
+          data-netlify attribute and provisions the endpoint automatically —
+          submissions land in Site settings > Forms, with email notification.
+          No third-party account, nothing to paste in.
+
+          The hidden form-name input is required: it's how Netlify matches a
+          JavaScript submission back to the right form. bot-field is a honeypot
+          — real people never see it, so anything that fills it is a bot.
+
+          NOTE: this ties the form to Netlify hosting. If the site ever moves,
+          swap the action for a Formspree endpoint and this markup still works.
+        -->
+        <form id="contact-form" name="contact" method="POST" action="/"
+              data-netlify="true" data-netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact" />
+          <p hidden><label>Leave this field empty: <input name="bot-field" /></label></p>
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <p id="form-status" class="form-status" role="status"></p>
+          <p class="form-note">Prefer email? Reach me directly at <a href="mailto:kyejackoson@gmail.com">kyejackoson@gmail.com</a>.</p>
+        </form>
+      </div>
+
+      <div class="contact-info">
+        <span class="eyebrow">Direct</span>
+        <h2 class="mt-0">Or reach out directly</h2>
+        <p>If you'd like to discuss a role, my portfolio, or a potential opportunity, feel free to get in touch.</p>
+        <dl>
+          <dt>Email</dt>
+          <dd><a href="mailto:kyejackoson@gmail.com">kyejackoson@gmail.com</a></dd>
+          <dt>Location</dt>
+          <dd>Gold Coast, Australia</dd>
+          <dt>Open to</dt>
+          <dd>Brisbane &amp; Melbourne relocation</dd>
+        </dl>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <dl class="title-block">
+      <div><dt>Drawn</dt><dd>Kye Jackson</dd></div>
+      <div><dt>Scale</dt><dd>1:1</dd></div>
+      <div><dt>Sheet</dt><dd>Contact</dd></div>
+      <div><dt>Year</dt><dd><span id="year"></span></dd></div>
+      <div class="footer-links">
+        <a href="mailto:kyejackoson@gmail.com">Email</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </dl>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

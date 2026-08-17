@@ -1,0 +1,21 @@
+# Source material — the originals the site's images were made FROM.
+# 164MB of Procreate exports, SolidWorks PDFs and raw renders. Keep them on
+# disk, keep them out of the deploy.
+Kyes folders/
+
+# Local build output (what actually gets uploaded)
+_site/
+
+# NOTE: the .ps1 scripts ARE tracked on purpose — render-pdfs.ps1 and crop.ps1
+# are how the site's images get regenerated when drawings change, so they're
+# worth version history. netlify.toml blocks them from being served.
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Claude Code local settings (keep launch.json, it's useful to share)
+.claude/settings.local.json

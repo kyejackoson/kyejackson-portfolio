@@ -1,0 +1,701 @@
+/* ==========================================================================
+   Kye Jackson — Industrial Design Portfolio
+   Design system: drafting-sheet chrome, blueprint/redline accents,
+   condensed industrial display type + monospace spec type.
+   ========================================================================== */
+
+:root {
+  --paper: #f2f0e8;
+  --paper-dim: #e9e6da;
+  --line: #dbd6c6;
+  --ink: #1c1e1b;
+  --ink-soft: #57584f;
+  --blueprint: #2c4a8c;
+  --blueprint-dim: #dfe4ee;
+  --redline: #c23b1e;
+  --redline-text: #9e2f17;
+
+  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  --container: 1180px;
+  --frame-inset: 16px;
+  --nav-h: 88px;
+  --radius: 1px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.002em;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: clamp(3.2rem, 9vw, 6.8rem); font-weight: 800; }
+h2 { font-size: clamp(2rem, 4.4vw, 3.1rem); }
+h3 { font-family: var(--font-body); font-weight: 600; text-transform: none; font-size: 1.2rem; letter-spacing: -0.01em; }
+
+p { margin: 0 0 1em; color: var(--ink); max-width: 62ch; }
+
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blueprint);
+  margin-bottom: 1em;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--blueprint);
+  display: inline-block;
+}
+
+.lede {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  max-width: 42em;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 2.25rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.95em 1.7em;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--blueprint); border-color: var(--blueprint); }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-secondary:hover { background: var(--ink); color: var(--paper); }
+.btn-sm { padding: 0.65em 1.2em; font-size: 0.72rem; }
+
+/* ---------- Drafting-sheet frame (injected by main.js) ---------- */
+.sheet-frame {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  display: none;
+}
+.sheet-frame__border {
+  position: absolute;
+  inset: var(--frame-inset);
+  border: 1px solid var(--ink);
+  opacity: 0.16;
+}
+.sheet-frame__ticks-x,
+.sheet-frame__ticks-y {
+  position: absolute;
+  display: flex;
+  color: var(--ink-soft);
+  opacity: 0.4;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+}
+.sheet-frame__ticks-x {
+  top: calc(var(--frame-inset) - 15px);
+  left: var(--frame-inset);
+  right: var(--frame-inset);
+  justify-content: space-between;
+}
+.sheet-frame__ticks-y {
+  top: var(--frame-inset);
+  bottom: var(--frame-inset);
+  left: calc(var(--frame-inset) - 17px);
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media (min-width: 900px) {
+  .sheet-frame { display: block; }
+  :root { --frame-inset: 20px; }
+  body { padding: 0 2px; }
+}
+
+/* ---------- Nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(242, 240, 232, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.nav-logo .mark {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.6rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 0.3em 0;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: -2px;
+  height: 1px;
+  background: var(--redline);
+  transition: right 0.22s ease;
+}
+.nav-links a:hover,
+.nav-links a[aria-current="page"] { color: var(--ink); }
+.nav-links a:hover::after,
+.nav-links a[aria-current="page"]::after { right: 0; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+.nav-toggle span { width: 22px; height: 2px; background: var(--ink); }
+
+/* ---------- Hero ---------- */
+/* padding-top/bottom only: .hero is combined with .container on the same
+   element, and a shorthand `padding` here would zero out .container's
+   left/right padding since both set the same property. */
+.hero { padding-top: 5.5rem; padding-bottom: 4.5rem; }
+.hero-meta {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.hero-meta div dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  margin-bottom: 0.35em;
+}
+.hero-meta div dd { margin: 0; font-weight: 600; font-size: 0.9rem; }
+.hero-actions { display: flex; gap: 1rem; margin-top: 2.2rem; flex-wrap: wrap; }
+
+/* ---------- Sections ---------- */
+.section { padding: 5.5rem 0; position: relative; }
+.section-alt { background: var(--paper-dim); }
+.section-rule {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 0;
+}
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+.section-head .lede { margin: 0; }
+.section-index {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* ---------- Project grid / cards ---------- */
+.project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; }
+.project-card { display: block; background: var(--paper); }
+.project-thumb {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--paper-dim);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+}
+.project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.project-card:hover .project-thumb img { transform: scale(1.03); }
+
+.project-thumb .corner {
+  position: absolute;
+  width: 14px; height: 14px;
+  border-color: var(--redline);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.project-thumb .corner.tl { top: 8px; left: 8px; border-top: 1.5px solid; border-left: 1.5px solid; }
+.project-thumb .corner.br { bottom: 8px; right: 8px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+.project-card:hover .corner { opacity: 0.9; }
+
+.project-thumb .sheet-no {
+  position: absolute;
+  top: 10px; right: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  background: var(--paper);
+  padding: 0.2em 0.5em;
+  border: 1px solid var(--line);
+}
+
+.placeholder-thumb {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  background: repeating-linear-gradient(135deg, var(--paper-dim), var(--paper-dim) 9px, #e2ddc9 9px, #e2ddc9 18px);
+}
+.placeholder-thumb strong { display: block; font-family: var(--font-body); color: var(--ink); font-weight: 600; margin-bottom: 0.4em; }
+
+.project-card .tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blueprint);
+  margin-bottom: 0.5em;
+  display: block;
+}
+.project-card h3 { margin-bottom: 0.35em; }
+.project-card p { color: var(--ink-soft); font-size: 0.92rem; margin: 0; }
+.project-card .scale-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  margin-top: 0.6em;
+  display: block;
+}
+
+.coming-soon { opacity: 0.55; }
+.coming-soon .project-thumb { cursor: default; }
+
+/* padding around grid cells so the 3px gap reads as hairline rules on paper */
+.project-grid .project-card { padding: 0 1.6rem 2.4rem 0; }
+.project-grid .project-card:nth-child(2n) { padding-right: 0; padding-left: 1.6rem; }
+
+/* ---------- Featured strip on home ---------- */
+.featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.25rem; }
+
+/* ---------- Split (about blurb) ---------- */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.split-media .placeholder-thumb,
+.split-media img { aspect-ratio: 4 / 5; }
+.split-media img { width: 100%; height: 100%; object-fit: cover; border: 1px solid var(--line); }
+
+/* ---------- Skills list ---------- */
+.tag-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; padding: 0; }
+.tag-list li {
+  list-style: none;
+  padding: 0.5em 1em;
+  border: 1px solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+/* ---------- Case study page ---------- */
+.case-hero { padding-top: 3.5rem; }
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.case-meta div dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  margin-bottom: 0.4em;
+}
+.case-meta div dd { margin: 0; font-weight: 600; font-size: 0.95rem; }
+
+.case-hero-image {
+  margin-top: 3rem;
+  aspect-ratio: 16 / 9;
+  background: var(--paper-dim);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.case-hero-image img { width: 100%; height: 100%; object-fit: cover; }
+.case-hero-image .zoom-link { width: 100%; height: 100%; }
+
+/* Hero showing a full drawing sheet: match A3 landscape and contain it. */
+.case-hero-image--sheet { aspect-ratio: 1.414 / 1; background: #fff; }
+.case-hero-image--sheet img { object-fit: contain; }
+
+/* Hero for wide 2:1 studio render plates. */
+.case-hero-image--pano { aspect-ratio: 2.05 / 1; }
+
+/* Hero for a square render — keeps it from being cropped to a letterbox. */
+.case-hero-image--square { aspect-ratio: 1 / 1; max-width: 620px; }
+
+.case-section { padding: 4rem 0; border-bottom: 1px solid var(--line); }
+.case-section:last-of-type { border-bottom: none; }
+.case-section-inner { display: grid; grid-template-columns: 220px 1fr; gap: 3rem; }
+.case-section-inner h2 { margin: 0; font-size: 1.5rem; }
+.case-section-inner .sheet-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--redline-text);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.8em;
+}
+
+.case-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; align-items: start; }
+.case-gallery .placeholder-thumb, .case-gallery img { aspect-ratio: 4 / 3; }
+/* Renders are square, so a 1:1 cell fills edge to edge with no empty bars;
+   drawing sheets keep the wider cell that suits an A3 landscape page. */
+.render-cell img { aspect-ratio: 1 / 1; }
+/* contain, not cover: renders are square and drawing sheets are A3 landscape —
+   cropping either one to the cell ratio cuts off the part being shown. */
+.case-gallery img {
+  width: 100%;
+  border: 1px solid var(--line);
+  object-fit: contain;
+  background: #fff;
+}
+.case-gallery.full { grid-template-columns: 1fr; }
+.case-gallery.full .placeholder-thumb, .case-gallery.full img { aspect-ratio: 16 / 9; }
+
+/* Renders shot on a black backdrop: fill the cell edge to edge on a matching
+   ground, so they read as deliberate dark plates rather than a black rectangle
+   letterboxed inside a white box. */
+.plate-dark img {
+  object-fit: cover;
+  background: #0d0d0d;
+  border-color: #0d0d0d;
+}
+
+.case-gallery.three { grid-template-columns: repeat(3, 1fr); }
+.case-gallery.four { grid-template-columns: repeat(4, 1fr); }
+/* Wide studio renders: 2:1 plates that shouldn't be squeezed into a 4:3 cell. */
+.case-gallery.wide img { aspect-ratio: 2 / 1; object-fit: cover; }
+.case-gallery.three img, .case-gallery.four img { aspect-ratio: 1 / 1; }
+
+/* Numbered step captions for process sequences. */
+.step-caption { counter-increment: step; }
+.case-gallery.steps { counter-reset: step; }
+.step-caption span:first-child::before {
+  content: counter(step, decimal-leading-zero) " — ";
+  color: var(--redline-text);
+}
+
+/* A3 landscape sheet — sized to the drawing's own ratio so nothing is cropped. */
+.sheet-figure { margin: 0; }
+.sheet-figure img {
+  width: 100%;
+  aspect-ratio: 1.414 / 1;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.drawing-cell { display: flex; flex-direction: column; }
+
+/* Compact comparison table — reads like a spec block on a drawing sheet, not a
+   data grid. Scrolls inside itself on narrow screens so the page never does. */
+.spec-table-wrap { overflow-x: auto; margin: 1.5rem 0 0; }
+.spec-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.spec-table th, .spec-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.75rem 1rem 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.spec-table thead th {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  font-weight: 500;
+  border-bottom-color: var(--ink);
+  padding-bottom: 0.6rem;
+}
+.spec-table tbody th { font-weight: 600; padding-right: 1.5rem; white-space: nowrap; }
+.spec-table td { color: var(--ink-soft); }
+.spec-table td.verdict { font-family: var(--font-mono); font-size: 0.78rem; color: var(--redline-text); white-space: nowrap; }
+.spec-table td.verdict[data-rank="keep"] { color: var(--blueprint); }
+
+/* ---------- Zoomable images + lightbox ---------- */
+.zoomable { cursor: zoom-in; }
+.zoom-link { display: block; position: relative; }
+.zoom-link::after {
+  content: "⤢";
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.zoom-link:hover::after, .zoom-link:focus-visible::after { opacity: 1; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(20, 21, 19, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1.5rem 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.lightbox[open], .lightbox.is-open { opacity: 1; pointer-events: auto; }
+.lightbox img {
+  max-width: 100%;
+  max-height: calc(100vh - 8rem);
+  object-fit: contain;
+  background: #fff;
+  cursor: zoom-in;
+}
+.lightbox img.is-zoomed { cursor: zoom-out; max-width: none; max-height: none; }
+.lightbox__scroll {
+  max-width: 100%;
+  max-height: calc(100vh - 8rem);
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox__bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(242, 240, 232, 0.75);
+}
+.lightbox__bar a { color: rgba(242, 240, 232, 0.75); border-bottom: 1px solid transparent; }
+.lightbox__bar a:hover { color: #fff; border-color: #fff; }
+.lightbox__close {
+  background: none;
+  border: 1px solid rgba(242, 240, 232, 0.35);
+  color: rgba(242, 240, 232, 0.85);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.5em 0.9em;
+  cursor: pointer;
+}
+.lightbox__close:hover { color: #fff; border-color: #fff; }
+body.lightbox-open { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox, .zoom-link::after { transition: none; }
+}
+
+.cell-caption {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0.6rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+.cell-caption a { color: var(--blueprint); border-bottom: 1px solid transparent; }
+.cell-caption a:hover { border-color: var(--blueprint); }
+
+.next-project { padding-top: 4.5rem; padding-bottom: 4.5rem; text-align: center; border-top: 1px solid var(--ink); }
+.next-project .eyebrow { justify-content: center; }
+.next-project h2 a:hover { color: var(--blueprint); }
+
+/* ---------- Contact ---------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; }
+.form-field { margin-bottom: 1.5rem; }
+.form-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin-bottom: 0.6em;
+}
+.form-field input, .form-field textarea {
+  width: 100%;
+  padding: 0.9em 1em;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.form-field input:focus, .form-field textarea:focus { outline: 2px solid var(--blueprint); outline-offset: 1px; }
+.form-note { font-size: 0.82rem; color: var(--ink-soft); margin-top: 1rem; }
+.form-status { margin-top: 1rem; font-size: 0.9rem; font-weight: 600; font-family: var(--font-mono); }
+.form-status[data-state="success"] { color: #2c6a45; }
+.form-status[data-state="error"] { color: var(--redline-text); }
+
+.contact-info dl { margin: 2rem 0 0; }
+.contact-info dt { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin-bottom: 0.4em; }
+.contact-info dd { margin: 0 0 1.8rem; font-size: 1.05rem; font-weight: 500; }
+.contact-info dd a:hover { color: var(--blueprint); }
+
+/* ---------- Footer — title block ---------- */
+.site-footer { border-top: 1px solid var(--ink); padding: 2.2rem 0; }
+.title-block {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: 1.5rem;
+  align-items: end;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+.title-block dt { text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin-bottom: 0.4em; }
+.title-block dd { margin: 0; color: var(--ink); font-weight: 500; }
+.title-block .footer-links { display: flex; gap: 1.2rem; justify-self: end; }
+.title-block .footer-links a { color: var(--ink-soft); }
+.title-block .footer-links a:hover { color: var(--blueprint); }
+
+/* ---------- Utility ---------- */
+.mt-0 { margin-top: 0; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .nav-links {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0; right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 2rem;
+    gap: 1.3rem;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .nav-links.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .nav-toggle { display: flex; }
+
+  .project-grid, .featured-grid, .split, .contact-grid, .case-gallery { grid-template-columns: 1fr; }
+  .project-grid .project-card,
+  .project-grid .project-card:nth-child(2n) { padding: 0 0 2.4rem; }
+  .case-section-inner { grid-template-columns: 1fr; gap: 1rem; }
+  .case-meta { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 2rem; }
+  .split { gap: 2rem; }
+  .split-media { order: -1; }
+  .title-block { grid-template-columns: 1fr 1fr; }
+  .title-block .footer-links { grid-column: 1 / -1; justify-self: start; margin-top: 0.5rem; }
+}
