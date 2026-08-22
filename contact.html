@@ -55,20 +55,18 @@
   <section class="section" style="padding-top: 0;">
     <div class="container contact-grid">
 
-      <div>
-        <!--
-          Netlify Forms. Netlify's build step detects this form by its
-          data-netlify attribute and provisions the endpoint automatically —
-          submissions land in Site settings > Forms, with email notification.
-          No third-party account, nothing to paste in.
+      <!--
+        This column used to hold a Netlify Forms contact form. It was silently
+        failing in production, so the direct email address is now the primary
+        path: a plain mailto plus a copy button, with no server, no third-party
+        account and nothing that breaks if the site ever moves off Netlify.
 
-          The hidden form-name input is required: it's how Netlify matches a
-          JavaScript submission back to the right form. bot-field is a honeypot
-          — real people never see it, so anything that fills it is a bot.
+        To bring a form back, the markup below still works as-is once you have
+        a working endpoint. Netlify Forms needs "Form detection" switched on in
+        Site configuration > Forms before it will accept submissions; the
+        alternative is a Formspree endpoint in the action attribute. Either way
+        the submit handler in js/main.js is still there and will pick it up.
 
-          NOTE: this ties the form to Netlify hosting. If the site ever moves,
-          swap the action for a Formspree endpoint and this markup still works.
-        -->
         <form id="contact-form" name="contact" method="POST" action="/"
               data-netlify="true" data-netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact" />
@@ -87,17 +85,30 @@
           </div>
           <button type="submit" class="btn btn-primary">Send Message</button>
           <p id="form-status" class="form-status" role="status"></p>
-          <p class="form-note">Prefer email? Reach me directly at <a href="mailto:kyejackoson@gmail.com">kyejackoson@gmail.com</a>.</p>
         </form>
+      -->
+      <div class="contact-cta">
+        <span class="eyebrow">Get in touch</span>
+        <h2 class="mt-0">Email me</h2>
+        <p>The quickest way to reach me. A short note about the role or project is plenty &mdash; I'll come back to you with whatever you need, portfolio pieces and drawings included.</p>
+
+        <a class="contact-email" href="mailto:kyejackoson@gmail.com?subject=Portfolio%20enquiry">kyejackoson@gmail.com</a>
+
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:kyejackoson@gmail.com?subject=Portfolio%20enquiry">Open in mail app</a>
+          <button type="button" class="btn btn-secondary" id="copy-email" data-copy="kyejackoson@gmail.com">Copy address</button>
+        </div>
+        <p id="copy-status" class="form-status" role="status"></p>
+        <p class="form-note">No mail app set up? Copy the address and paste it into Gmail, Outlook or whatever you use.</p>
       </div>
 
       <div class="contact-info">
-        <span class="eyebrow">Direct</span>
-        <h2 class="mt-0">Or reach out directly</h2>
+        <span class="eyebrow">Details</span>
+        <h2 class="mt-0">Where I'm at</h2>
         <p>If you'd like to discuss a role, my portfolio, or a potential opportunity, feel free to get in touch.</p>
         <dl>
           <dt>Email</dt>
-          <dd><a href="mailto:kyejackoson@gmail.com">kyejackoson@gmail.com</a></dd>
+          <dd><a href="mailto:kyejackoson@gmail.com?subject=Portfolio%20enquiry">kyejackoson@gmail.com</a></dd>
           <dt>Location</dt>
           <dd>Gold Coast, Australia</dd>
           <dt>Open to</dt>

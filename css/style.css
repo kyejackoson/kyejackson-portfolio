@@ -650,6 +650,27 @@ body.lightbox-open { overflow: hidden; }
 .contact-info dd { margin: 0 0 1.8rem; font-size: 1.05rem; font-weight: 500; }
 .contact-info dd a:hover { color: var(--blueprint); }
 
+/* Email-first contact block. Replaced the Netlify form, so the address itself
+   is the hero element here rather than a field label. */
+.contact-cta { border-top: 2px solid var(--ink); padding-top: 2rem; }
+.contact-email {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2.4vw, 1.55rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+  padding-bottom: 0.12em;
+  border-bottom: 2px solid var(--redline);
+  margin: 1.6rem 0 2rem;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.contact-email:hover { color: var(--blueprint); border-bottom-color: var(--blueprint); }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+.contact-actions .btn { cursor: pointer; }
+.contact-info { border-top: 2px solid var(--ink); padding-top: 2rem; }
+
 /* ---------- Footer — title block ---------- */
 .site-footer { border-top: 1px solid var(--ink); padding: 2.2rem 0; }
 .title-block {

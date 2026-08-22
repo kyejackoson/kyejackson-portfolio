@@ -108,6 +108,64 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
+  // Copy-to-clipboard for the contact address. The mailto link is the primary
+  // path; this is for anyone on a machine with no mail client configured, where
+  // clicking mailto does nothing at all.
+  //
+  // Three tiers, because the async Clipboard API is the nicest but the least
+  // reliable — it needs a secure context AND clipboard-write permission, and
+  // some browsers/managed profiles deny it outright. Verified denied in one
+  // automated browser, which is exactly the case the fallbacks cover:
+  //   1. navigator.clipboard.writeText
+  //   2. select the address + document.execCommand("copy") (legacy, wider reach)
+  //   3. leave it selected and tell the visitor to press Ctrl+C
+  const copyBtn = document.querySelector("#copy-email");
+  if (copyBtn) {
+    const copyStatus = document.querySelector("#copy-status");
+
+    function selectAddress() {
+      const target = document.querySelector(".contact-email");
+      if (!target) return false;
+      const range = document.createRange();
+      range.selectNodeContents(target);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      return true;
+    }
+
+    function report(ok, address) {
+      copyStatus.textContent = ok
+        ? "Copied — " + address
+        : "Couldn't copy automatically — the address is selected, press Ctrl+C.";
+      copyStatus.setAttribute("data-state", ok ? "success" : "error");
+    }
+
+    copyBtn.addEventListener("click", async () => {
+      const address = copyBtn.dataset.copy;
+
+      try {
+        await navigator.clipboard.writeText(address);
+        report(true, address);
+        return;
+      } catch (err) {
+        // fall through
+      }
+
+      const selected = selectAddress();
+      try {
+        if (selected && document.execCommand("copy")) {
+          report(true, address);
+          return;
+        }
+      } catch (err) {
+        // fall through
+      }
+
+      report(false, address);
+    });
+  }
+
   // Contact form — progressive enhancement. Without JS the form still does a
   // normal POST and Netlify serves its own thank-you page; this just keeps the
   // user on the page and reports the result inline.
