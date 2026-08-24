@@ -459,6 +459,13 @@ p { margin: 0 0 1em; color: var(--ink); max-width: 62ch; }
   border-color: #0d0d0d;
 }
 
+/* Portrait studio renders: 2:3 plates, the ratio they come out of Visualize at. */
+.case-gallery.portrait img { aspect-ratio: 2 / 3; }
+
+/* In-context photo plate: carries its own ratio so a wide shot fills the cell
+   edge to edge instead of sitting letterboxed inside a 16:9 box. */
+.plate-photo img { aspect-ratio: 1.69 / 1; object-fit: cover; }
+
 .case-gallery.three { grid-template-columns: repeat(3, 1fr); }
 .case-gallery.four { grid-template-columns: repeat(4, 1fr); }
 /* Wide studio renders: 2:1 plates that shouldn't be squeezed into a 4:3 cell. */
